@@ -1,0 +1,14 @@
+##. Def: Compute the sum of n numbers
+function main(): void{
+	n, s: integer
+	write << "n = "
+	read >> n
+	write << endln
+	while (i: integer = n) > 1:
+		a: integer
+		write << "a" << i << " = "
+		read >> a
+		s += a
+		i -= 1
+	write << "Sum: " << s << endln
+}
