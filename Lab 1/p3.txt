@@ -1,5 +1,5 @@
 ##. Def: Compute the sum of n numbers
-function main(): void{
+function main(): void
 	n, s: integer
 	write << "n = "
 	read >> n
@@ -11,4 +11,3 @@ function main(): void{
 		s += a
 		i -= 1
 	write << "Sum: " << s << endln
-}

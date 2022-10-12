@@ -1,5 +1,5 @@
 ##. Def: Compute the Max of 3 Numbers
-function main(): void{
+function main(): void
 	int1, int2: integer
 	integer 3int								
 	intmax: integer = 0				
@@ -15,4 +15,3 @@ function main(): void{
 	if intmax < int3:
 		intmax = int3
 	write << "Max of 3 Numbers: " << intmax << endln
-}

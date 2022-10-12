@@ -1,5 +1,5 @@
 ##. Def: Compute if number is prime
-function main(): void{
+function main(): void
 	num: integer
 	flag: boolean = false
 	write << "number = "
@@ -16,4 +16,3 @@ function main(): void{
 	else:
 		write << " is a prime number"
 	write << endln
-}
