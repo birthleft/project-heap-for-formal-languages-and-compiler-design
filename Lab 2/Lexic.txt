@@ -19,8 +19,10 @@ Lexic:
 	c. Constants
 
 1. Integer - rule:
-	noconst := "+" no | "-" no | no
-	no := digit { no }
+	sign = "+" | "-"
+	non-zero digit = "1" | … | "9"
+	digit = "0" | non-zero digit
+	integer = 0 | [ sign ] non-zero digit { digit }
 
 2. Character
 	charconst = "'" char "'"
