@@ -1,0 +1,34 @@
+Alphabet:
+	a. Upper (A-Z) and lower case letters (a-z) of the English alphabet
+	b. Underline character '_';
+	c. Decimal digits (0-9);
+
+Lexic:
+	a. Special symbols, representing:
+		- operators + - * / % < <= = >= ==
+		- separators [ ] : SPACE NEWLINE TAB << >>
+		- reserved words:
+			character string integer real if else while for in read write
+
+	b. Identifiers
+		- a sequence of letters and  digits, such that the first character is a letter; the rule is:
+			identifier ::= letter | letter { letter | digit }
+			letter ::= "A" | "B" | . ..| "Z"
+			digit ::= "0" | "1" |...| "9"
+
+	c. Constants
+
+1. Integer - rule:
+	noconst := "+" no | "-" no | no
+	no := digit { no }
+
+2. Character
+	charconst = "'" char "'"
+	char = letter | digit | special
+	special = ";" | "." | ...
+
+3. String
+	string := char { string }
+	char = letter | digit | special
+	special = ";" | "." | ...
+	stringconst = """ { char } """
