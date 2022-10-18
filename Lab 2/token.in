@@ -4,10 +4,12 @@
 /
 %
 <
+>
 <=
 =
 >=
 ==
+<>
 [
 ]
 :
@@ -15,7 +17,7 @@ SPACE
 NEWLINE
 TAB
 <<
->
+>>
 character
 string
 integer

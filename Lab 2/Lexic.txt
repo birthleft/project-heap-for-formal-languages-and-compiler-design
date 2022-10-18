@@ -5,7 +5,7 @@ Alphabet:
 
 Lexic:
 	a. Special symbols, representing:
-		- operators + - * / % < <= = >= ==
+		- operators + - * / % < > <= = >= == <>
 		- separators [ ] : SPACE NEWLINE TAB << >>
 		- reserved words:
 			character string integer real if else while for in read write
