@@ -1,0 +1,40 @@
+function ::= "function" IDENTIFIER [ "(" decllist ")" ] ":" functype cmpdstmt
+
+decllist ::= declaration | declaration "," decllist
+
+declaration ::= simpldeclaration | extnddeclaration
+simpldeclaration ::= IDENTIFIER ":" type
+extnddeclaration ::= IDENTIFIER ":" type assignment
+
+functype ::== "void" | type
+type ::= singltntype | arraytype
+singltntype ::= "boolean" | "character" | "integer" | "real"
+arraytype ::= singltntype "[" nr "]" | "string"
+
+assignment ::= "=" expression
+
+stmt ::= simplstmt | structstmt
+simplstmt ::= assignstmt | iostmt
+assignstmt ::= IDENTIFIER assignment
+
+structstmt ::= cmpdstmt | ifstmt | whilestmt | forstmt
+cmpdstmt ::= stmt | stmt stmtlist
+
+ifstmt ::= "if" condition ":" stmt ["else" ":" stmt]
+whilestmt ::= "while" condition ":" stmt
+forstmt	::= "for" ( IDENTIFIER | "(" simpldeclaration ")" ) "in" ( IDENTIFIER | ARRAYCONST ) ":" stmt
+
+iostmt ::= instmt | outstmt
+outstmt ::= "write" "<<" IDENTIFIER { "<<" IDENTIFIER }
+instmt ::= "read" ">>" IDENTIFIER { ">>" IDENTIFIER }
+
+condition ::= extndexpression RELATION expression
+extndexpression ::= expression | "(" extnddeclaration ")"
+expression ::= expression OPERATOR term | term
+term ::= term OPERATOR factor | factor
+factor ::= "(" expression ")" | IDENTIFIER
+
+OPERATOR ::= "+" | "-" | "/" | "*" | "^" | "%"
+RELATION ::= "<" | "<=" | "=" | "<>" | ">=" | ">" | "=="
+ARRAYCONST ::= "[" { ARRAYELEMCONST } "]"
+ARRAYELEMCONST ::= DIGITCONST | CHARCONST | STRINGCONST | BOOLCONST
