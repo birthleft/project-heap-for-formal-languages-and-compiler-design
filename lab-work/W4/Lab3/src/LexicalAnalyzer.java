@@ -132,7 +132,7 @@ public class LexicalAnalyzer {
     }
 
     private AbstractMap.SimpleImmutableEntry<String, String> startsWithIdentifier(String data){
-        String identifierRegex = "^[a-zA-Z][a-zA-Z0-9]*(?=["+ this.computeSeparatorRegex() + "|" + this.computeOperatorRegex() + "])";
+        String identifierRegex = "^[a-zA-Z][a-zA-Z0-9]{0,255}(?=["+ this.computeSeparatorRegex() + "|" + this.computeOperatorRegex() + "])";
         Matcher identifierMatcher = Pattern.compile(identifierRegex).matcher(data);
         if (identifierMatcher.find()){
             // If the data received starts with an identifier,

@@ -1,6 +1,8 @@
 import java.util.AbstractMap;
 import java.util.ArrayList;
 
+// The Program Internal Form is an ordered ArrayList of Map.Entries,
+// containing the Token and the Token's Position in the Symbol Table.
 public class ProgramInternalForm {
     private final ArrayList<AbstractMap.SimpleImmutableEntry<String, Integer>> list;
 
