@@ -89,12 +89,12 @@ public class SymbolTable {
     }
 
     // The "getKey" function returns the position of a given Symbol within the Symbol Table.
-    public Object getKey(Object value) {
+    public Integer getKey(Object value) {
         int listIndex = this.hash(value, this.hashTable.length);
         Node list = hashTable[listIndex];
         while (list != null) {
             if (list.value.equals(value))
-                return list.key;
+                return (Integer) list.key;
             list = list.next;
         }
         // If no such Symbol exists, it returns a Null Pointer.
@@ -102,7 +102,7 @@ public class SymbolTable {
     }
 
     // The "getValue" function returns the Symbol from a given Position within the Symbol Table.
-    public Object getValue(Object key) {
+    public Object getValue(Integer key) {
         for (Node node : hashTable) {
             Node list = node;
             while (list != null) {
@@ -115,7 +115,7 @@ public class SymbolTable {
         return null;
     }
 
-    public void viewContentAsHashTable() {
+    public void printInternalContent() {
         System.out.println();
         for (int index = 0; index < hashTable.length; index++) {
             System.out.print(index + ":");
@@ -128,10 +128,15 @@ public class SymbolTable {
         }
     }
 
-    public void viewContentAsSymbolTable() {
-        System.out.println();
+    public String viewContent() {
+        StringBuilder content = new StringBuilder();
+        content.append("\n");
         for (int index = 0; index < count; index++) {
-            System.out.println("" + index + " => " + getValue(index) + "");
+            content.append(index)
+                    .append(" => ")
+                    .append(getValue(index))
+                    .append("\n");
         }
+        return content.toString();
     }
 }

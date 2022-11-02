@@ -1,0 +1,20 @@
+The Program Internal Form is an ordered ArrayList of Map.Entries,
+containing the Token and the Token's Position in the Symbol Table.
+
+There are 3 Token Classifications: Separator, Operator, Reserved Word.
+
+For each token of the "separator" type, we build its general regex.
+Each "separator" regex is an alternate in the general regex.
+Due to the nature of our separators, there are some fringe cases:
+	1. In case the separator is an escape sentence, we take it as it is into the regex.
+	2. Otherwise, we create the regex by appending each character in its Hexadecimal ASCII representation.
+
+For each token of the "operator" type, we build its general regex.
+Each "operator" regex is an alternate in the general regex.
+We create each regex by appending each character in its Hexadecimal ASCII representation.
+
+For each token of the "reserved word" type, we build its general regex.
+Each "reserved word" regex is an alternate in the general regex.
+Due to the nature of our reserved words, we create each regex by appending each character in its Hexadecimal ASCII representation.
+However, at the end of each regex, we ensure that it is ONLY followed by separators.
+

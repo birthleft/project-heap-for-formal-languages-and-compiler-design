@@ -73,7 +73,7 @@ cmake-build-*/
 *.iws
 
 # IntelliJ
-out/
+W3/Lab 2/out/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
@@ -101,6 +101,5 @@ fabric.properties
 
 # IntelliJ project files
 .idea
-*.iml
 out
 gen
