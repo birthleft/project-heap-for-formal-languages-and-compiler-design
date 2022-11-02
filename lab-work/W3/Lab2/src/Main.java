@@ -1,17 +1,15 @@
 // 1a)
 public class Main {
     public static void main(String[] args) {
-        var scanner = new Scanner();
-        var table = scanner.symbolTable;
+        var table = new SymbolTable();
 
         table.put("a");
         table.put("ac");
         table.put("bb");
         table.put(3);
 
-        table.viewContentAsHashTable();
-        table.viewContentAsSymbolTable();
-
+        table.printInternalContent();
+        System.out.println(table.viewContent());
         System.out.println();
 
         System.out.println("\"a\" is at position " + table.getKey("a"));

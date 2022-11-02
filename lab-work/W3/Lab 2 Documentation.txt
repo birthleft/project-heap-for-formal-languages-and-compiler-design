@@ -1,0 +1,37 @@
+The Symbol Table is implemented using a Hash Table of Variable Dimension. 
+
+A Hash Table is fundamentally an Array of Linked Lists.
+A Linked List is made out of multiple Nodes.
+Each contains a key, a value and a reference to the next Node or a Null Pointer (if it's the last Node).
+The Key will play the role of the Position within the Symbol Table.
+The Position is an identifier that increments with each new Symbol added.
+
+A Hash Table requires a "hash" function.
+The Hash function is the Hash Code of the Symbol modulo the size of the Hash Table.
+The Hash Code is the sum of each ASCII character contained by the Symbol.
+
+The "put" function adds a Symbol to the Symbol Table.
+It calculates the hash of the Symbol given.
+Afterwards, it pinpoints the location of the Linked List having as index the hash of the Symbol Given.
+While the Linked List contains Nodes and not a Null Pointer, it checks for the existence of the Symbol.
+If the Symbol already exists, the function simply ends its execution.
+If the Symbol hasn't been found or the Linked List doesn't contain valid Nodes, it runs some additional checks before adding the new Symbol into the Hash Table.
+If the amount of Nodes is more than 3/4 of the Hash Table's size, it executes the "resize" function.
+After the resize, it calculates the hash of the Symbol given, this time taking the new size of the Hash Table into account.
+It then adds the new Symbol as the new head of the Linked List, placing the previous head of the Linked List as its "next Node" reference.
+
+The "resize" function reorganizes the Hash Table in order to better contain the new Symbols.
+We create a new empty Hash Table, double the size of the initial Hash Table.
+For each Linked List within the initial Hash Table, the function executes a set of instructions.
+While the Linked List contains Nodes and not a Null Pointer, it executes the Symbol transfer operations.
+It stores the Node succeeding the found Symbol within the old Hash Table's Linked List.
+It calculates the new Hash of the Symbol using the length of the new Hash Table.
+It adds the Symbol as the new head of the new Hash Table's Linked List, placing the previous head of the Linked List as its "next Node" reference.
+It then proceeds to the next Symbol found within the old Hash Table's Linked List.
+After all the transfer operations are complete, the old Hash Table is overwritten by the new Hash Table.
+
+The "getKey" function returns the position of a given Symbol within the Symbol Table.
+If no such Symbol exists, it returns a Null Pointer.
+
+The "getValue" function returns the Symbol from a given Position within the Symbol Table.
+If no such Position exists, it returns a Null Pointer.
