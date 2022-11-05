@@ -103,3 +103,6 @@ fabric.properties
 .idea
 out
 gen
+
+# Lab Work project files
+W4/Lab3/output

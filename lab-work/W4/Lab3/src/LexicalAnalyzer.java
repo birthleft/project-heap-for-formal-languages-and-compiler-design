@@ -184,7 +184,7 @@ public class LexicalAnalyzer {
                     if (!Objects.equals(tokenChecker.getValue(), null)){
                         // If the line starts with a token of type "separator", "operator" or "reserved word",
                         // add it to the PIF and remove it from the rest of the line.
-                        programInternalForm.generate(tokenChecker.getValue(), 0);
+                        programInternalForm.generate(tokenChecker.getValue(), -1);
                         data = data.replaceFirst(tokenChecker.getKey(), "");
                     }
                     else {
@@ -246,6 +246,7 @@ public class LexicalAnalyzer {
             }
             System.out.println(consoleOutput.toString().replaceAll("[\\n]$", ""));
 
+            this.createOutputFolder();
             this.createSymbolTableOutputFile();
             this.createProgramInternalFormOutputFile();
             this.reset();
@@ -254,12 +255,23 @@ public class LexicalAnalyzer {
             throw new RuntimeException(e);
         }
     }
-    
+
+    private void createOutputFolder(){
+        File folder = new File(Path.of("W4/Lab3/output").toUri());
+        boolean folderState = folder.mkdir();
+        if (folderState) {
+            System.out.println(ConsoleColors.PURPLE + "/output/ folder created." + ConsoleColors.RESET);
+        }
+        else {
+            System.out.println(ConsoleColors.PURPLE + "/output/ folder already created." + ConsoleColors.RESET);
+        }
+    }
+
     private void createSymbolTableOutputFile(){
         File file = new File(Path.of("W4/Lab3/output", "ST" + ".out").toUri());
         try {
-            boolean value = file.createNewFile();
-            if (value) {
+            boolean fileState = file.createNewFile();
+            if (fileState) {
                 System.out.println(ConsoleColors.PURPLE + "ST.out file created." + ConsoleColors.RESET);
             }
             else {
@@ -278,8 +290,8 @@ public class LexicalAnalyzer {
     private void createProgramInternalFormOutputFile(){
         File file = new File(Path.of("W4/Lab3/output", "PIF" + ".out").toUri());
         try {
-            boolean value = file.createNewFile();
-            if (value) {
+            boolean fileState = file.createNewFile();
+            if (fileState) {
                 System.out.println(ConsoleColors.PURPLE + "PIF.out file created." + ConsoleColors.RESET);
             }
             else {
