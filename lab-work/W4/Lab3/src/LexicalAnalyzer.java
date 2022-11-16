@@ -131,6 +131,17 @@ public class LexicalAnalyzer {
         return new AbstractMap.SimpleImmutableEntry<>(null, null);
     }
 
+    /*
+    private String extractToken(String data){
+        String tokenRegex = "^.*?(?=["+ this.computeSeparatorRegex() + "|" + this.computeOperatorRegex() + "])";
+        Matcher tokenMatcher = Pattern.compile(tokenRegex).matcher(data);
+        if (tokenMatcher.find()){
+            return tokenMatcher.group();
+        }
+        return null;
+    }
+    */
+
     private AbstractMap.SimpleImmutableEntry<String, String> startsWithIdentifier(String data){
         String identifierRegex = "^[a-zA-Z][a-zA-Z0-9]{0,255}(?=["+ this.computeSeparatorRegex() + "|" + this.computeOperatorRegex() + "])";
         Matcher identifierMatcher = Pattern.compile(identifierRegex).matcher(data);
