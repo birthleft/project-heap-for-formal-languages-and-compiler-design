@@ -1,0 +1,18 @@
+file ::= states "\n" alphabet "\n" initial_state final_states "\n" transitions
+
+states ::= string [ "," states ]
+
+string := char { string } 
+char ::= letter | digit | special 
+letter ::= "A" | "B" | . ..| "Z" 
+digit ::= "0" | "1" |...| "9"
+special ::= ";" | "." | ... 
+
+alphabet ::= string [ "," alphabet ]
+
+initial_state = string
+
+final_states = string [ "," final_states ]
+
+transitions = transition [ "\n" transitions ]
+transition = string "," string "=" string
