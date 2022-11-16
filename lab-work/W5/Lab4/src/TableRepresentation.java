@@ -1,11 +1,9 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class TableRepresentation {
     private final Map<String, Integer> sourceStates = new HashMap<>();
     private final Map<String, Integer> alphabetElements = new HashMap<>();
-    private final Map<String, Integer> destinationStates = new HashMap<>();
+    private final Map<Integer, List<String>> destinationStates = new HashMap<>();
     private final Integer[][] table;
     private Integer sourceStatesCount, alphabetElementsCount, destinationStatesCount;
 
@@ -21,22 +19,36 @@ public class TableRepresentation {
         if (!this.alphabetElements.containsKey(alphabetElement)){
             this.alphabetElements.put(alphabetElement, alphabetElementsCount++);
         }
-        if (!this.destinationStates.containsKey(destinationState)){
-            this.destinationStates.put(destinationState, destinationStatesCount++);
+
+
+        Integer tableData = table[this.sourceStates.get(sourceState)][this.alphabetElements.get(alphabetElement)];
+        if(tableData == null){
+
+            this.destinationStates.put(destinationStatesCount++, new LinkedList<>(Collections.singleton(destinationState)));
+            table[this.sourceStates.get(sourceState)][this.alphabetElements.get(alphabetElement)]
+                    = destinationStatesCount - 1;
+            return;
+        }
+        else {
+            for (Map.Entry<Integer, List<String>> entry: this.destinationStates.entrySet()){
+                if(Objects.equals(entry.getKey(), tableData)){
+                    entry.getValue().add(destinationState);
+                    return;
+                }
+            }
         }
 
-        table[this.sourceStates.get(sourceState)][this.alphabetElements.get(alphabetElement)]
-                = this.destinationStates.get(destinationState);
+        throw new RuntimeException("Unexpected error when adding function.");
     }
 
-    public String getFunctionResult(String sourceState, String alphabetElement){
+    public List<String> getFunctionResult(String sourceState, String alphabetElement){
         if (!this.sourceStates.containsKey(sourceState) || !this.alphabetElements.containsKey(alphabetElement)) {
             return null;
         }
         Integer encodedAlphabetElement = table[this.sourceStates.get(sourceState)][this.alphabetElements.get(alphabetElement)];
-        for (Map.Entry<String, Integer> entry : this.destinationStates.entrySet()) {
-            if (Objects.equals(encodedAlphabetElement, entry.getValue())) {
-                return entry.getKey();
+        for (Map.Entry<Integer, List<String>> entry : this.destinationStates.entrySet()) {
+            if (Objects.equals(encodedAlphabetElement, entry.getKey())) {
+                return entry.getValue();
             }
         }
         return null;

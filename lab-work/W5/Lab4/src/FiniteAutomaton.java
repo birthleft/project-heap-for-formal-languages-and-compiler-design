@@ -140,6 +140,18 @@ public class FiniteAutomaton {
         }
     }
 
+    public boolean isDeterministic(){
+        for(String state: allStates){
+            for(String letter: alphabet) {
+                List<String> destinationStates = representation.getFunctionResult(state, letter);
+                if (destinationStates != null && destinationStates.size() > 1) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public void showUI(){
         Scanner userInputScanner = new Scanner(System.in);
         while(true){

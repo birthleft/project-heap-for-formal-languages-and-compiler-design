@@ -2252,13 +2252,30 @@
 											"height": 13,
 											"text": "«void»+showUI()",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGEgCCzTBHzOos=",
+											"_parent": {
+												"$ref": "AAAAAAGEf6I4MTPM47M="
+											},
+											"model": {
+												"$ref": "AAAAAAGEgCCzPxHnTHE="
+											},
+											"font": "Arial;13;0",
+											"left": 69,
+											"top": 640,
+											"width": 292.31591796875,
+											"height": 13,
+											"text": "«boolean»+isDeterministic()",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 64,
 									"top": 605,
 									"width": 302.31591796875,
-									"height": 38
+									"height": 53
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -2298,7 +2315,7 @@
 							"left": 64,
 							"top": 512,
 							"width": 302.31591796875,
-							"height": 131,
+							"height": 146,
 							"nameCompartment": {
 								"$ref": "AAAAAAGEf6I4MTPGXaM="
 							},
@@ -2730,7 +2747,7 @@
 											"top": 812,
 											"width": 400.73388671875,
 											"height": 13,
-											"text": "«Map<String, Integer>»-destinationStates",
+											"text": "«Map<Integer, List<String>>»-destinationStates",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2849,7 +2866,7 @@
 											"top": 910,
 											"width": 400.73388671875,
 											"height": 13,
-											"text": "«String»+getFunctionResult(sourceState, alphabetElement)",
+											"text": "«List<String>»+getFunctionResult(sourceState, alphabetElement)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -3750,7 +3767,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 205,
-									"top": 691,
+									"top": 698,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -3771,7 +3788,7 @@
 									"visible": null,
 									"font": "Arial;13;0",
 									"left": 190,
-									"top": 692,
+									"top": 699,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -3792,7 +3809,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 234,
-									"top": 690,
+									"top": 697,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -3874,8 +3891,8 @@
 										"$ref": "AAAAAAGEf68F1de8chw="
 									},
 									"font": "Arial;13;0",
-									"left": 158,
-									"top": 663,
+									"left": 159,
+									"top": 678,
 									"width": 90.70166015625,
 									"height": 13,
 									"alpha": -0.5235987755982988,
@@ -3896,8 +3913,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 190,
-									"top": 666,
+									"left": 191,
+									"top": 681,
 									"height": 13,
 									"alpha": -0.7853981633974483,
 									"distance": 40,
@@ -3916,8 +3933,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 230,
-									"top": 657,
+									"left": 231,
+									"top": 672,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -3964,7 +3981,7 @@
 								"$ref": "AAAAAAGEf6NuozsyXV4="
 							},
 							"lineStyle": 1,
-							"points": "223:751;217:643",
+							"points": "223:751;218:658",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGEf68F1te/6b8="
@@ -4662,6 +4679,15 @@
 							},
 							"name": "showUI",
 							"stereotype": "void"
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAGEgCCzPxHnTHE=",
+							"_parent": {
+								"$ref": "AAAAAAGEf6I4MDPDghg="
+							},
+							"name": "isDeterministic",
+							"stereotype": "boolean"
 						}
 					]
 				},
@@ -4865,7 +4891,7 @@
 								"$ref": "AAAAAAGEf6Nuozsw3fI="
 							},
 							"name": "destinationStates",
-							"stereotype": "Map<String, Integer>",
+							"stereotype": "Map<Integer, List<String>>",
 							"visibility": "private",
 							"type": ""
 						},
@@ -4963,7 +4989,7 @@
 								"$ref": "AAAAAAGEf6Nuozsw3fI="
 							},
 							"name": "getFunctionResult",
-							"stereotype": "String",
+							"stereotype": "List<String>",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
