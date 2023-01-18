@@ -1,0 +1,94 @@
+%{
+	#include <math.h>
+	#include <stdio.h>
+	#include <string.h>
+	#include "y.tab.h"
+	int currentLine = 1;
+%}
+
+%option noyywrap
+
+SIGN				[+-]
+NON-ZERO_DIGIT		[1-9]
+DIGIT    			0|{NON-ZERO_DIGIT}
+INTEGER				0|{SIGN}?{NON-ZERO_DIGIT}{DIGIT}*
+
+LETTER				[a-zA-Z]
+SPECIAL 			[ $&+,:;=?@#|'<>.^*()%!-]
+CHAR				{LETTER}|{DIGIT}|{SPECIAL}
+CHARCONST			[']{CHAR}[']
+
+STR					{CHAR}{STR}*
+STRCONST			[\"]({CHAR})*[\"]
+
+COMMENT				##.*
+
+IDENTIFIER			[a-zA-Z][a-zA-Z0-9]{0,255}
+
+%%
+
+"character"		{printf("Reserved word: %s\n", yytext);return CHARACTER;}
+"string"		{printf("Reserved word: %s\n", yytext);return STRING;}
+"integer"		{printf("Reserved word: %s\n", yytext);return INTEGER;}
+"void"			{printf("Reserved word: %s\n", yytext);return VOID;}
+"function"		{printf("Reserved word: %s\n", yytext);return FUNCTION;}
+"if"			{printf("Reserved word: %s\n", yytext);return IF;}
+"else"			{printf("Reserved word: %s\n", yytext);return ELSE;}
+"while"			{printf("Reserved word: %s\n", yytext);return WHILE;}
+"for"			{printf("Reserved word: %s\n", yytext);return FOR;}
+"in"			{printf("Reserved word: %s\n", yytext);return IN;}
+"read"			{printf("Reserved word: %s\n", yytext);return READ;}
+"write"			{printf("Reserved word: %s\n", yytext);return WRITE;}
+"endln"			{printf("Reserved word: %s\n", yytext);return ENDLN;}
+"range"			{printf("Reserved word: %s\n", yytext);return RANGE;}
+
+"+"				{printf("Operator: %s\n", yytext);return plus;}
+"-"				{printf("Operator: %s\n", yytext);return minus;}
+"*"				{printf("Operator: %s\n", yytext);return mul;}
+"/"				{printf("Operator: %s\n", yytext);return division;}
+"%"				{printf("Operator: %s\n", yytext);return mod;}
+"="				{printf("Operator: %s\n", yytext);return eq;}
+"<"				{printf("Operator: %s\n", yytext);return less;}
+">"				{printf("Operator: %s\n", yytext);return more;}
+"=="			{printf("Operator: %s\n", yytext);return equal;}
+"!="			{printf("Operator: %s\n", yytext);return different;}
+"<="			{printf("Operator: %s\n", yytext);return lessOrEqual;}
+">="			{printf("Operator: %s\n", yytext);return moreOrEqual;}
+"<<"			{printf("Operator: %s\n", yytext);return leftShift;}
+">>"			{printf("Operator: %s\n", yytext);return rightShift;}
+
+"["				{printf("Separator: %s\n", yytext);return leftSquareBracket;}
+"]"				{printf("Separator: %s\n", yytext);return rightSquareBracket;}
+"("				{printf("Separator: %s\n", yytext);return leftRoundBracket;}
+")"				{printf("Separator: %s\n", yytext);return rightRoundBracket;}
+";"				{printf("Separator: %s\n", yytext);return semicolon;}
+" "				{printf("Separator: %s\n", yytext);return space;}
+"\t"			{printf("Separator: %s\n", yytext);return tab;}
+":"				{printf("Separator: %s\n", yytext);return colon;}
+","				{printf("Separator: %s\n", yytext);return comma;}
+
+{IDENTIFIER}		{printf("Identifier: %s\n", yytext);return IDENTIFIER;}
+{INTEGER}			{printf("Integer: %s\n", yytext);return INTCONST;}
+{STRCONST}			{printf("String: %s\n", yytext);return STRCONST;}
+{CHARCONST}			{printf("Character: %s\n", yytext);return CHARCONST;}
+
+[ \t]+			/* eat up whitespace */
+[\n]+ 			{
+					currentLine++;
+				}
+.				{
+					printf("Illegal symbol at line %d\n", currentLine); 
+					return -1;
+				}
+%%
+
+int main(){
+	FILE *fp;
+	char filename[50];
+	printf("Enter the filename: \n");
+	scanf("%s",filename);
+	fp = fopen(filename,"r");
+	yyin = fp;
+	yylex();
+	return 0;
+}

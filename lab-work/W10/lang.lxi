@@ -1,0 +1,60 @@
+%{
+	#include <math.h>
+	#include <stdio.h>
+	#include <string.h>
+	int currentLine = 1;
+%}
+
+%option noyywrap
+
+SIGN				[+-]
+NON-ZERO_DIGIT		[1-9]
+DIGIT    			0|{NON-ZERO_DIGIT}
+INTEGER				0|{SIGN}?{NON-ZERO_DIGIT}{DIGIT}*
+
+LETTER				[a-zA-Z]
+SPECIAL 			[ $&+,:;=?@#|'<>.^*()%!-]
+CHAR				{LETTER}|{DIGIT}|{SPECIAL}
+CHARCONST			[']{CHAR}[']
+
+STR					{CHAR}{STR}*
+STRCONST			[\"]{CHAR}*[\"]
+
+COMMENT				##.*
+
+RESERVED_WORD		character|string|integer|void|function|if|else|while|for|in|read|write|endln|range
+OPERATOR			==|!=|<=|>=|<<|>>|\+|\-|\*|\/|\%|\=|\<|\>
+SEPARATOR			\[|\]|\(|\)|\;|\ |\t|\:|\,
+
+IDENTIFIER			[a-zA-Z][a-zA-Z0-9]{0,255}
+%%
+
+{RESERVED_WORD}		{printf("Reserved word: %s\n", yytext);}
+{OPERATOR}			{printf("Operator: %s\n", yytext);}
+{SEPARATOR}			{printf("Separator: %s\n", yytext);}
+{IDENTIFIER}		{printf("Identifier: %s\n", yytext);}
+{INTEGER}			{printf("Integer: %s\n", yytext);}
+{STRCONST}			{printf("String: %s\n", yytext);}
+{CHARCONST}			{printf("Character: %s\n", yytext);}
+{COMMENT}			{printf("Comment: %s\n", yytext);}
+
+[\t]+				/* eat up whitespace */
+[\n]+ 				{
+						currentLine++;
+					}
+.					{
+						printf("Illegal symbol at line %d\n", currentLine);
+						return -1;
+					}
+%%
+
+int main(){
+	FILE *fp;
+	char filename[50];
+	printf("Enter the filename: \n");
+	scanf("%s",filename);
+	fp = fopen(filename,"r");
+	yyin = fp;
+	yylex();
+	return 0;
+}
